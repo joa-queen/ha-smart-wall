@@ -8,20 +8,41 @@ import Switch from '../components/Switch';
 
 
 class Living extends React.Component {
+  constructor(props) {
+    super(props);
+    this.entityName = 'light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0';
+  }
+
   componentDidMount () {
     this.props.load();
   }
 
+  changed = (service, entityName) => {
+    this.props.callService('homeassistant', service, {
+      entity_id: entityName
+    });
+  }
+
   render () {
     const Left = (
-      <Switch
-        entityName={'light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0'}
-      />
+      <div style={{...container}}>
+        <Switch
+          entityName={this.entityName}
+          changed={this.changed}
+          label="Couch"
+        />
+      </div>
     );
     return (
       <App left={Left} />
     )
   }
+}
+
+const container = {
+  display: 'flex',
+  height: '100%',
+  flexDirection: 'column',
 }
 
 const mapDispatchToProps = (dispatch) => {

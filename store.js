@@ -2,6 +2,7 @@ import { createConnection, subscribeEntities } from 'home-assistant-js-websocket
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import request from 'superagent';
+import config from './config';
 
 const exampleInitialState = {
   loaded: false,
@@ -27,8 +28,8 @@ export const reducer = (state = exampleInitialState, action) => {
 
 // ACTIONS
 export const load = () => dispatch => {
-  return createConnection('wss://192.168.1.33:8123/api/websocket', {
-    authToken: 'knuth09'
+  return createConnection(config.socket, {
+    authToken: config.password
   }).then(
     (conn) => {
       console.log('Connection established!');
@@ -39,12 +40,11 @@ export const load = () => dispatch => {
 }
 
 export const callService = (domain, service, data) => dispatch => {
-  return request.post(`https://192.168.1.33:8123/api/services/${domain}/${service}`, {
+  return request.post(`${config.apiHost}/services/${domain}/${service}`, {
     ...data
   }).set({
-    'x-ha-access': 'knuth09'
+    'x-ha-access': config.password
   }).then((result) => {
-    console.log(result);
     return result;
   })
 }

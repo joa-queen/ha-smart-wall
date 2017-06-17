@@ -12,6 +12,7 @@ export default class MyDocument extends Document {
      <html>
        <Head>
          <style>{`body { margin: 0; background: #333; color: white; } /* custom! */`}</style>
+         <link rel="stylesheet" href="https://unpkg.com/react-rangeslider@2.0.1/lib/index.css" />
        </Head>
        <body>
          <Main />

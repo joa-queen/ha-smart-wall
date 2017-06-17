@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import Lightbulb from '../icons/lightbulb';
-import { callService } from '../store'
+import Slider from 'react-rangeslider';
 
-export default connect(state => state, { callService })(({ entityName, entities, callService }) => {
+export default connect(state => state)(({ entityName, entities, changed, label }) => {
   const entity = entities[entityName];
 
   if (!entity) {
@@ -12,11 +12,11 @@ export default connect(state => state, { callService })(({ entityName, entities,
   const style = entity.state == 'on' ? styles.on : styles.off;
   const action = entity.state == 'on' ? 'turn_off' : 'turn_on';
   return (
-    <div style={container} onClick={() => callService('light', action, {entity_id: entityName})}>
-      <div style={{...mainStyle, ...style}}>
+    <div style={container}>
+      <div style={{...mainStyle, ...style}} onClick={() => changed(action, entityName)}>
         <div style={styles.iconWrapper}>
           <Lightbulb />
-          <span>Couch</span>
+          <span>{label}</span>
         </div>
       </div>
     </div>
@@ -26,16 +26,17 @@ export default connect(state => state, { callService })(({ entityName, entities,
 const color = '#dada74';
 
 const container = {
-  height: 'calc(100% - 40px)',
+  display: 'flex',
+  flex: 1,
 }
 const mainStyle = {
   margin: '20px',
   border: '2px solid ' + color,
-  height: '100%',
-  width: '60%',
   alignItems: 'center',
   fill: '#666',
   color: '#666',
+  flex: '3',
+  display: 'flex',
 };
 const styles = {
   on: {
@@ -49,6 +50,17 @@ const styles = {
   iconWrapper: {
     width: '120px',
     textAlign: 'center',
-    margin: '150px auto',
+    margin: '0 auto',
+  },
+  sliderWrapper: {
+    height: '100%',
+    flex: '1',
+    textAlign: 'center',
+  },
+  slider: {
+    width: '10px',
+    height: '100%',
+    margin: '20px',
+    background: 'white',
   }
 }
