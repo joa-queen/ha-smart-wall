@@ -35,7 +35,7 @@ const mainStyle = {
   alignItems: 'center',
   fill: '#666',
   color: '#666',
-  flex: '3',
+  flex: '1',
   display: 'flex',
 };
 const styles = {
