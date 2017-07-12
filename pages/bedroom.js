@@ -41,7 +41,7 @@ class Living extends React.Component {
 
 const container = {
   display: 'flex',
-  height: '100%',
+  height: '100vh',
   flexDirection: 'column',
 }
 
