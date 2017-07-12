@@ -62,5 +62,5 @@ const styles = {
     height: '100%',
     margin: '20px',
     background: 'white',
-  }
+  },
 }
