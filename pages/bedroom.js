@@ -10,7 +10,7 @@ import Switch from '../components/Switch';
 class Living extends React.Component {
   constructor(props) {
     super(props);
-    this.entityName = 'light.aeotec_zw098_led_bulb_level_4_0';
+    this.entityName = 'light.bedroom_level';
   }
 
   componentDidMount () {
